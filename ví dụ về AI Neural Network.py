@@ -85,11 +85,11 @@ class NeuralNetwork(object): #OOP related
         #cho hàm chạy tiếp về hướng ngược lại sau khi đi qua layer cuối cùng
         
         for l in range(2, self.numLayers):
-            z = zs[-1] #lấy giá trị z cuối cùng
+            z = zs[-l] #lấy giá trị z cuối cùng
             placeholderActivation = self.sigmoidDer(z)
             delta = np.dot(self.weights[-l+1].transpose(), delta) * placeholderActivation
-            gradient_b[-1] = delta
-            gradient_w[-1] = np.dot(delta, activations[-l-1].transpose()) #-l-1 bởi vì l bắt đầu bằng 2 thì gradient b lấy layer -2, gradient w lấy layer -3 hay (-l, -l-1)
+            gradient_b[-l] = delta
+            gradient_w[-l] = np.dot(delta, activations[-l-1].transpose()) #-l-1 bởi vì l bắt đầu bằng 2 thì gradient b lấy layer -2, gradient w lấy layer -3 hay (-l, -l-1)
         return (gradient_b, gradient_w)
     
     def evaluate(self, testData):
