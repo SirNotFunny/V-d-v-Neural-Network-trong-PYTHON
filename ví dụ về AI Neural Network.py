@@ -94,8 +94,8 @@ class NeuralNetwork(object): #OOP related
     def evaluate(self, testData):
         #hàm tìm số lần mà model trả về kết quả chính xác
         #lưu ý: kết quả của model được cho là kết quả trong layer neuron cuối cùng với giá trị activation x cao nhất
-        results = [(np.argmax(self.feedForward(x)), y) for (x, y) in testData] #cho chạy giá trị x qua hàm feedforward lần cuối trước khi so sánh với y #argmax là giá trị lớn nhất của tất cả giá trị x
-        return sum(int(x == y) for (x, y) in results) #nếu mà x == y thì sẽ +1 lần, sum sẽ là tổng số lần chính xác
+        results = [(self.feedForward(x), y) for (x, y) in testData] #cho chạy giá trị x qua hàm feedforward lần cuối trước khi so sánh với y #argmax là giá trị lớn nhất của tất cả giá trị x
+        return sum(np.allclose(x, y, atol=0.1) for (x, y) in results) #allclose sẽ kiểm tra xem nếu x và y có khác nhau quá 0.1 hay không, nếu ko khác nhau thì sẽ +1 
 
     def costDer(self, outputActivation, y):
         #hàm trả lại gradient của cost function với outputActivation là kết quả máy trả về và y là kết quả thực sự
