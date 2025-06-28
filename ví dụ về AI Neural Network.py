@@ -5,7 +5,6 @@ import numpy as np
 #phương pháp này sử dụng các phép nhân ma trận nên chạy trên CPU thông thường sẽ vô cùng chậm
 
 class NeuralNetwork(object): #OOP related
-    #hướng đi của hàm này là: cho input 
     def __init__(self, sizes):
         #sizes là ma trận bao gồm số lượng neuron trong một layer 
         #ví dụ: sizes = [a, b, c] => layer 1 có a neuron, layer 2 có b neuron, layer 3 có c neuron
